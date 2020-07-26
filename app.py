@@ -43,17 +43,14 @@ def bpi():
                 y += character
         x=''
         y+=str(res)
-        ys.download("./static/downloads/",filename=y)
-        if res=='140':
-            ext='mp3'
-            mp4 = "'%s'.mp4" % y
-            mp3 = "'%s'.mp3" % y
-            ffmpeg = ('ffmpeg -i %s ' % mp4 + mp3)
-            subprocess.call(ffmpeg, shell=True)
+        ys.download("./mysite/TA-WEB/static/downloads/",filename=y)
+        resolution=ys.resolution
+        if ys.itag==140:
+            type='Audio'
+            resolution='128kbps'
         else:
-            ext='mp4'
-
-        a=f"<a id='download_link' href=./static/downloads/{y}.{ext} target='_blank' download >Download Your {ys.resolution} Video</a>"
+            type='Video'
+        a=f"<a id='download_link' href=./static/downloads/{y}.mp4 target='_blank' download >Download {resolution} {type}</a>"
         return a
     except:
         return '<a href="/">some thing error click here to refresh the page</a>'
