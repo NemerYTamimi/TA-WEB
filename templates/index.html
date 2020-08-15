@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
           type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    {{script}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 
 </head>
-<body>
-<body class="hero-anime dark">
+<body class="hero-anime dark" onload="{{script}}">
 
 <div class="navigation-wrap bg-light start-header start-style">
     <div class="container">
@@ -42,20 +42,18 @@
                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                 <a class="nav-link" href="#">Contact US</a>
                             </li>
-                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 show">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                                   aria-haspopup="true" aria-expanded="false">Services</a>
+                                   aria-expanded="false" aria-haspopup="true">Products</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Youtube Downloader</a>
-                                    <a class="dropdown-item" href="#">coming soon</a>
-                                    <a class="dropdown-item" href="#">coming soon  </a>
-                                    <a class="dropdown-item" href="#">coming soon</a>
+                                    <a class="dropdown-item" href="ytd" id='op1'>Youtube Downloader</a>
+                                    <a class="dropdown-item" href="pdf2doc" id='op2'>pdf to word</a>
+                                    <a class="dropdown-item" href="doc2pdf" id='op3'>word to pdf</a>
+                                    <a class="dropdown-item" href="#" id='op4'>coming soon</a>
                                 </div>
                             </li>
                         </ul>
-
                     </div>
-
                 </nav>
             </div>
         </div>
@@ -67,9 +65,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1>
+                        <h1 id="main_label">
                             <span>T</span><span>A</span><span>-</span><span>W</span><span>E</span><span>B</span><br>
-                            <span>Y</span><span>o</span><span>u</span><span>t</span><span>u</span><span>b</span><span>e</span><span> </span><span>D</span><span>o</span><span>w</span><span>n</span><span>l</span><span>o</span><span>a</span><span>d</span><span>e</span><span>r</span></h1>
+                            <span>Y</span><span>o</span><span>u</span><span>t</span><span>u</span><span>b</span><span>e</span><span> </span><span>D</span><span>o</span><span>w</span><span>n</span><span>l</span><span>o</span><span>a</span><span>d</span><span>e</span><span>r</span>
+                        </h1>
 
                     </div>
                 </div>
@@ -77,13 +76,13 @@
         </div>
 <div>
     <div class="section " style="margin-top: -80px;">
-<div class="vertical-center-row form-wrapper">
-        <input  id='url' type="text" name="url" placeholder="Enter Link here">
-        <button id="submit"  onclick="getInfo();">Get Info</button>
-    <div class="section vertical-center-row">
-        <img src="/static/30.svg" id="img" style="display: none;margin-left: 50%;"></div>
-        <div id="result"></div>
-    </div>
+        <div class="vertical-center-row form-wrapper" id="form">
+            <input id='url' name="url" placeholder="Enter Link here" type="text">
+            <button id="submit" onclick="submit();">Get Info</button>
+            <div class="section vertical-center-row">
+                <img id="img" src="/static/30.svg" style="display: none;margin-left: 50%;"></div>
+            <div id="result"></div>
+        </div>
     </div>
 </div>
         <div class="section mt-5">

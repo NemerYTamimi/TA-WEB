@@ -14,10 +14,11 @@ body{
     line-height: 24px;
     font-weight: 400;
     color: #212112;
-    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
-    background-position: center;
-    background-repeat: repeat;
-    background-size: 7%;
+    background-image: url(../pat-back.svg), url(../pat-back2.png);
+    background-position: center, bottom left;
+    background-repeat: repeat, no-repeat;
+    background-attachment: fixed;
+    background-size: 7%, 50%;
     background-color: #fff;
     overflow-x: hidden;
     transition: all 200ms linear;
@@ -465,6 +466,7 @@ body.dark .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 /* #Media
 ================================================== */
 
+
 @media (max-width: 767px) {
     h1{
         font-size: 38px;
@@ -670,3 +672,4 @@ body.dark .logo img {
 .linkclass{
     text-align: center;
 }
+
