@@ -146,7 +146,7 @@ body{
     transition: all 200ms linear;
 }
 .vertical-center-row {
-text-align: center;
+    text-align: center;
 }
 .nav-item:hover:after{
     bottom: 0;
@@ -466,7 +466,6 @@ body.dark .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 /* #Media
 ================================================== */
 
-
 @media (max-width: 767px) {
     h1{
         font-size: 38px;
@@ -669,7 +668,12 @@ body.dark .logo img {
 #result {
     text-align: left;
 }
-.linkclass{
+
+.linkclass {
     text-align: center;
+}
+
+.about {
+    margin-top: 150px;
 }
 
