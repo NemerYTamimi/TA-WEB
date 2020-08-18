@@ -60,6 +60,8 @@ def downlaod():
         for character in x:
             if character.isalnum():
                 y += character
+            else:
+                y+='_'
         x = ''
         y += str(res)
         ys.download("./static/downloads/", filename=y)
