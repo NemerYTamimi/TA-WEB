@@ -27,6 +27,8 @@ ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 @app.route('/', methods=['GET'])
 def home():
     return render_template("index.html", script="document.onload=y_function();")
+        #return render_template("comingsoon.html")
+
 
 
 @app.route('/index', methods=['POST'])
@@ -233,6 +235,16 @@ def doc2pdf_page():
 def youtube_page():
     return render_template("index.html", script="document.onload=y_function();")
 
+@app.route('/contactus',methods=['GET'])
+def contact():
+    return render_template("contactus.html")
 
+@app.route('/aboutus',methods=['GET'])
+def about():
+    return render_template("index.html",script="document.onload=about_function();")
+
+@app.route('/comingsoon',methods=['GET'])
+def coming():
+    return render_template("comingsoon.html")
 if __name__ == '__main__':
     app.run(debug=True)
