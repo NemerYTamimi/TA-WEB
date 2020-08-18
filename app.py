@@ -62,6 +62,7 @@ def downlaod():
                 y += character
             else:
                 y+='_'
+
         x = ''
         y += str(res)
         ys.download("./static/downloads/", filename=y)
