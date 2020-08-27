@@ -6,7 +6,7 @@ now = time.time()
 
 for f in os.listdir(path):
 
- if os.stat(f).st_mtime < now -  1* 86400:
+ if os.stat(f).st_mtime < now -  1* 21600:
 
   if os.path.isfile(f):
 

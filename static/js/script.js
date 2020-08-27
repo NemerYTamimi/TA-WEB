@@ -6,19 +6,6 @@
 (function($) { "use strict";
     $("body").addClass("dark");
     $("#switch").addClass("switched");
-    $(function() {
-        var header = $(".start-style");
-        $(window).scroll(function() {
-            var scroll = $(window).scrollTop();
-
-            if (scroll >= 10) {
-                header.removeClass('start-style').addClass("scroll-on");
-            } else {
-                header.removeClass("scroll-on").addClass('start-style');
-            }
-        });
-    });
-
     //Animation
 
     $(document).ready(function() {
@@ -99,7 +86,6 @@ function pdf2word() {
 
     }
 }
-
 function word2pdf() {
     loading();
     document.getElementById('img').style.display = 'block';
@@ -123,18 +109,18 @@ function word2pdf() {
 
     }
 }
-
 function download() {
     document.getElementById('img').style.display = 'block';
     var ajax = new XMLHttpRequest();
     var e = document.getElementById("selectres");
+    var link = document.getElementById('url').value;
     var res = e.options[e.selectedIndex].value;
     var method = "POST";
     var url = "/downloads";
     var asynchronous = true;
     ajax.open(method, url, asynchronous);
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    ajax.send('res='.concat(res));
+    ajax.send('res='.concat(res.concat('&url='.concat(link))));
     ajax.onreadystatechange = function () {
         if ((this.readyState == 4) && (this.status = 200)) {
             a = document.createElement('div')
@@ -151,28 +137,37 @@ function y_function() {
     document.getElementById('url').type = 'text';
     document.getElementById('submit').innerText = 'GetInfo';
     submit = getInfo;
-    document.getElementById('main_label').innerHTML = '<span>T</span><span>A</span><span>-</span><span>W</span><span>E</span><span>B</span><br><span>Y</span><span>o</span><span>u</span><span>t</span><span>u</span><span>b</span><span>e</span><span> </span><span>D</span><span>o</span><span>w</span><span>n</span><span>l</span><span>o</span><span>a</span><span>d</span><span>e</span><span>r</span>';
+    document.getElementById('main_label').innerHTML = '<span>T</span><span>A</span><span>-</span><span>W</span><span>E</span><span>B</span><br>';
+    document.getElementById('sub_label').innerHTML = '<span>Y</span><span>o</span><span>u</span><span>t</span><span>u</span><span>b</span><span>e</span><span> </span><span>D</span><span>o</span><span>w</span><span>n</span><span>l</span><span>o</span><span>a</span><span>d</span><span>e</span><span>r</span>';
     let formHTML = '<input id="url" type="text" name="url" placeholder="Enter Link here"><button id="submit" onclick="submit();">Get Info</button><div class="section vertical-center-row"><img src="/static/30.svg" id="img" style="display: none;margin-left: 50%;"></div><div id="result"></div>'
     document.getElementById('form').innerHTML = formHTML
     document.getElementById('op1').style = "background-color: royalblue;"
+    document.getElementById('op2').style = "background-color: transparent;"
+    document.getElementById('op3').style = "background-color: transparent;"
 }
 function pdf2word_function() {
     submit = pdf2word;
-    document.getElementById('main_label').innerHTML = '<span>T</span><span>A</span><span>-</span><span>W</span><span>E</span><span>B</span><br><span>P</span><span>D</span><span>F</span><span>-</span><span>T</span><span>o</span><span>-</span><span>W</span><span>o</span><span>r</span><span>d</span><span>';
+    document.getElementById('main_label').innerHTML = '<span>T</span><span>A</span><span>-</span><span>W</span><span>E</span><span>B</span><br>';
+    document.getElementById('sub_label').innerHTML = '<span>P</span><span>D</span><span>F</span><span>-</span><span>T</span><span>o</span><span>-</span><span>W</span><span>o</span><span>r</span><span>d</span>'
     let formHTML = '<form method="post" action="/uploader" enctype="multipart/form-data"> <input id="url" type="file" name="file" placeholder="Choose file" accept="application/pdf"><button id="submit" onclick="submit();">Convert</button></form><div class="section vertical-center-row"><img src="/static/30.svg" id="img" style="display: none;margin-left: 50%;"></div><div id="result"></div>'
     document.getElementById('form').innerHTML = formHTML;
     document.getElementById('url').style = 'padding-top: 10px;padding-bottom: 30px;';
+    document.getElementById('op1').style = "background-color: transparent;"
     document.getElementById('op2').style = "background-color: royalblue;"
+    document.getElementById('op3').style = "background-color: transparent;"
 
 }
-
 function word2pdf_function() {
     submit = pdf2word;
-    document.getElementById('main_label').innerHTML = '<span>T</span><span>A</span><span>-</span><span>W</span><span>E</span><span>B</span><br><span>W</span><span>o</span><span>r</span><span>d</span><span>-</span><span>T</span><span>o</span><span>-</span><span>P</span><span>D</span><span>F</span><span>';
+    document.getElementById('main_label').innerHTML = '<span>T</span><span>A</span><span>-</span><span>W</span><span>E</span><span>B</span><br>';
+    document.getElementById('sub_label').innerHTML = '<span>W</span><span>o</span><span>r</span><span>d</span><span>-</span><span>T</span><span>o</span><span>-</span><span>P</span><span>D</span><span>F</span>';
     let formHTML = '<form method="post" action="/uploader1" enctype="multipart/form-data"> <input id="url" type="file" name="file" placeholder="Choose file" accept".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"><button id="submit" onclick="submit();"accept="application/doc,application/docx">Convert</button></form><div class="section vertical-center-row"><img src="/static/30.svg" id="img" style="display: none;margin-left: 50%;"></div><div id="result"></div>'
     document.getElementById('form').innerHTML = formHTML;
     document.getElementById('url').style = 'padding-top: 10px;padding-bottom: 30px;';
+    document.getElementById('op1').style = "background-color: transparent;"
+    document.getElementById('op2').style = "background-color: transparent;"
     document.getElementById('op3').style = "background-color: royalblue;"
+
 
 }
 
@@ -201,4 +196,5 @@ function addClass() {
 }
 
 sendLetter.addEventListener("click", addClass);
+
 

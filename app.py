@@ -26,10 +26,11 @@ ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template("index.html", script="document.onload=y_function();")
-        #return render_template("comingsoon.html")
+    return render_template("index.html")
 
-
+@app.route('/google4e850c9deb377567.html', methods=['GET'])
+def google():
+    return render_template("google4e850c9deb377567.html")
 
 @app.route('/index', methods=['POST'])
 def get_url():
@@ -46,13 +47,15 @@ def get_url():
         str += "</select><button id='requestbtn' onclick='download();'>Request Download Link</button>"
         return str
     except:
-        return '<a href="/">Something error <strong>click here </strong>to refresh the page</a> '
+        return '<a href="#">Something error please check url and try again</a> '
 
 
 @app.route('/downloads', methods=['POST'])
 def downlaod():
     try:
         res = request.form['res']
+        url = request.form['url']
+        yt = YouTube(url)
         print(res)
         ys = yt.streams.get_by_itag(res)
         x = ys.title
@@ -65,17 +68,24 @@ def downlaod():
 
         x = ''
         y += str(res)
+        print(y)
+
         ys.download("./static/downloads/", filename=y)
+        filename = f"./static/downloads/{y}.mp4"
         resolution = ys.resolution
         if ys.itag == 140:
+            thisFile = f"./static/downloads/{y}.mp4"
+            targetFile=f"./static/downloads/{y}.mp3"
+            os.rename(thisFile, targetFile)
+            filename=targetFile
             type = 'Audio'
             resolution = '128kbps'
         else:
             type = 'Video'
-        a = f"<a id='download_link' href=./static/downloads/{y}.mp4 target='_blank' download >Download {resolution} {type}</a>"
+        a = f"<a id='download_link' href={filename} target='_blank' download >Download {resolution} {type}</a>"
         return a
     except:
-        return '<a href="/">some thing error click here to refresh the page</a>'
+        return '<a href="#">Something error please click button to try again</a>'
 
 
 @app.route('/upload')
