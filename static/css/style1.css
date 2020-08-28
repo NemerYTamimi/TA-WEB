@@ -8,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #1f2029;
-    background-image: url(../static/pat-back.svg);
+    background-image: url(../pat-back.svg);
     background-position: center;
     background-repeat: repeat;
     background-attachment: fixed;
@@ -17,7 +17,6 @@ body {
     text-align: center;
     font-family: monospace;
     overflow: hidden;
-    overflow-x: hidden;
     transition: all 200ms linear;
 }
 
@@ -28,7 +27,7 @@ body {
 
 .letter h1 {
     font-size: 2rem;
-    font-family: 'Dancing Script';
+    font-family: 'Dancing Script', serif;
 }
 
 .letter small {

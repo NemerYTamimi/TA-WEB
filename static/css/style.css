@@ -58,7 +58,7 @@ body{
 }
 .navigation-wrap {
     position: fixed;
-    width: -webkit-fill-available;
+    width: 100vw;
     top: 0;
     left: 0;
     z-index: 1000;
