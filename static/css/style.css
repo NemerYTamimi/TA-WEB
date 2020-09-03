@@ -50,12 +50,14 @@ body{
     -webkit-transition : all 0.3s ease-out;
     transition : all 0.3s ease-out;
 }
-.start-header.scroll-on .navbar-brand img{
+
+.start-header.scroll-on .navbar-brand img {
     height: 50px;
     width: 100px;
-    -webkit-transition : all 0.3s ease-out;
-    transition : all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
+
 .navigation-wrap {
     position: fixed;
     width: 100vw;
@@ -65,7 +67,8 @@ body{
     -webkit-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
 }
-.navbar{
+
+.navbar {
     padding: 0;
 }
 .navbar-brand img{
@@ -178,6 +181,7 @@ body{
 .over-hide {
     overflow: hidden;
 }
+
 .absolute-center {
     position: absolute;
     top: 50%;
@@ -209,7 +213,8 @@ p {
     transition: all 300ms linear;
     transition-delay: 1700ms;
 }
-body.hero-anime p{
+
+body.hero-anime p {
     opacity: 0;
     transform: translateY(40px);
     transition-delay: 1700ms;
@@ -386,13 +391,14 @@ body.hero-anime #switch{
     transform: translate3d(0, 0px, 0);
 }
 .dropdown-menu {
-    padding: 10px!important;
+    padding: 10px !important;
     margin: 0;
     font-size: 13px;
     letter-spacing: 1px;
     color: #212121;
     background-color: #fcfaff;
     border: none;
+    left: -100%;
     border-radius: 3px;
     box-shadow: 0 5px 10px 0 rgba(138, 155, 165, 0.15);
     transition: all 200ms linear;
@@ -632,7 +638,6 @@ body.dark .logo img {
     display: flex;
     justify-content: center;
 }
-
 #img {
     align-self: flex-start;
 }
@@ -665,7 +670,6 @@ body.dark .logo img {
         background-color: #000;
         vertical-align: 0;
     }
-
     .dropdown-toggle::after {
         position: absolute;
         display: block;
@@ -691,16 +695,13 @@ body.dark .logo img {
         box-shadow: none;
         transition: all 200ms linear;
     }
-
     .dropdown-toggle[aria-expanded="true"] + .dropdown-menu {
         margin-top: 10px !important;
         margin-bottom: 20px !important;
     }
-
     body.dark .nav-item::before {
         background-color: #fff;
     }
-
     body.dark .dropdown-toggle::after {
         background-color: #fff;
     }
@@ -712,6 +713,12 @@ body.dark .logo img {
 
     body {
         background-image: url(../pat-back.svg);
+
+        position: relative
+    }
+
+    html, body {
+        overflow-x: hidden;
     }
 
     p {
