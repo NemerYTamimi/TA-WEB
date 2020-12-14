@@ -1,6 +1,6 @@
 import subprocess
 
-from flask import Flask, render_template, request, flash, url_for
+from flask import Flask, render_template, request, flash, url_for, send_from_directory
 from pytube import YouTube
 from shutil import copyfile
 import groupdocs_conversion_cloud
@@ -18,9 +18,13 @@ app_key = "d35894bb7edb207cae4ff9da4b9931c2"
 # Create instance of the API
 convert_api = groupdocs_conversion_cloud.ConvertApi.from_keys(app_sid, app_key)
 file_api = groupdocs_conversion_cloud.FileApi.from_keys(app_sid, app_key)
-UPLOAD_FOLDER = './static/uploads'
 
+UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+DOWNLOAD_FOLDER = 'static/downloads/'
+app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
+
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
 
@@ -70,12 +74,12 @@ def downlaod():
         y += str(res)
         print(y)
 
-        ys.download("./static/downloads/", filename=y)
-        filename = f"./static/downloads/{y}.mp4"
+        ys.download("static/downloads/", filename=y)
+        filename = f"static/downloads/{y}.mp4"
         resolution = ys.resolution
         if ys.itag == 140:
-            thisFile = f"./static/downloads/{y}.mp4"
-            targetFile=f"./static/downloads/{y}.mp3"
+            thisFile = f"static/downloads/{y}.mp4"
+            targetFile=f"static/downloads/{y}.mp3"
             os.rename(thisFile, targetFile)
             filename=targetFile
             type = 'Audio'
@@ -83,6 +87,7 @@ def downlaod():
         else:
             type = 'Video'
         a = f"<a id='download_link' href={filename} target='_blank' download >Download {resolution} {type}</a>"
+        #return send_from_directory(app.config['DOWNLOAD_FOLDER'], f"{y}.mp4", as_attachment=True)
         return a
     except:
         return '<a href="#">Something error please click button to try again</a>'
@@ -113,11 +118,11 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             output_name = filename.rsplit('.', 1)[0] + '.doc'
-            output_file = f"./static/downloads/{output_name}"
-            uploaded_file = f"./static/uploads/{filename}"
+            output_file = f"static/downloads/{output_name}"
+            uploaded_file = f"static/uploads/{filename}"
             print(uploaded_file)
             pdf2doc(filename, uploaded_file, output_file, output_name)
-            return f"<a id='download_link' href={output_file} target='_blank' download >Download </a>"
+            return send_from_directory(app.config['DOWNLOAD_FOLDER'], output_name, as_attachment=True)
 
 
 def pdf2doc(file, filename, output_file, output_name):
@@ -163,7 +168,7 @@ def pdf2doc(file, filename, output_file, output_name):
 
         request_download = groupdocs_conversion_cloud.DownloadFileRequest(output_name)
         response_download = file_api.download_file(request_download)
-        copyfile(response_download, f"./{output_file}")
+        copyfile(response_download, f"{output_file}")
 
     except groupdocs_conversion_cloud.ApiException as e:
         print("Exception when calling get_supported_conversion_types: {0}".format(e.message))
@@ -186,10 +191,10 @@ def upload_file2():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             output_name = filename.rsplit('.', 1)[0] + '.pdf'
-            output_file = f"./static/downloads/{output_name}"
-            uploaded_file = f"./static/uploads/{filename}"
+            output_file = f"static/downloads/{output_name}"
+            uploaded_file = f"static/uploads/{filename}"
             doc2pdf(filename, uploaded_file, output_file, output_name)
-            return f"<a id='download_link' href={output_file} target='_blank' download >Download </a>"
+            return send_from_directory(app.config['DOWNLOAD_FOLDER'], output_name, as_attachment=True)
         return "error"
 
 
@@ -230,7 +235,7 @@ def doc2pdf(file, filename, output_file, output_name):
     result = apiInstance.convert_document(groupdocs_conversion_cloud.ConvertDocumentRequest(settings))
     request_download = groupdocs_conversion_cloud.DownloadFileRequest(f"converted/{output_name}")
     response_download = file_api.download_file(request_download)
-    copyfile(response_download, f"./{output_file}")
+    copyfile(response_download, f"{output_file}")
     # Convert
     return render_template("index.html", script=f'<script>x=null</script>')
 
