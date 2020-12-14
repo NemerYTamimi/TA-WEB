@@ -1,6 +1,6 @@
 import subprocess
 
-from flask import Flask, render_template, request, flash, url_for, send_from_directory
+from flask import Flask, render_template, request, flash, url_for, send_from_directory,redirect,jsonify
 from pytube import YouTube
 from shutil import copyfile
 import groupdocs_conversion_cloud
@@ -35,6 +35,35 @@ def home():
 @app.route('/google4e850c9deb377567.html', methods=['GET'])
 def google():
     return render_template("google4e850c9deb377567.html")
+
+@app.route('/api/youtube', methods=['get'])
+def youtube_api():
+    global yt, url
+    url = request.args.get('url')
+    print(url)
+    itag= request.args.get('itag')
+    print(itag)
+    yt = YouTube(url)
+    ys=yt.streams.get_by_itag(itag)
+    x = ys.title
+    y=''
+    for character in x:
+        if character.isalnum():
+            y += character
+        else:
+            y += '_'
+
+    x = ''
+    y += str(itag)
+    ys.download(app.config['DOWNLOAD_FOLDER'], filename=y)
+    filename = app.config['DOWNLOAD_FOLDER']+f"{y}.mp4"
+    print(filename)
+    filepath=f"http://www.ta-pal.com/{filename}"
+    # return redirect(f"http://www.ta-pal.com/{filename}", code=302)
+    # return send_from_directory(app.config['DOWNLOAD_FOLDER'], f"{y}.mp4", as_attachment=True)\
+
+    return jsonify(url=filepath)
+
 
 @app.route('/index', methods=['POST'])
 def get_url():
