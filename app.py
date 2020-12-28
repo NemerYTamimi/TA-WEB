@@ -1,9 +1,11 @@
 import subprocess
 
-from flask import Flask, render_template, request, flash, url_for, send_from_directory
+from flask import Flask, render_template, request, flash, url_for, send_from_directory,redirect,jsonify
 from pytube import YouTube
 from shutil import copyfile
 import groupdocs_conversion_cloud
+from moviepy.editor import *
+
 
 import os
 
@@ -35,6 +37,85 @@ def home():
 @app.route('/google4e850c9deb377567.html', methods=['GET'])
 def google():
     return render_template("google4e850c9deb377567.html")
+    
+@app.route('/api/youtube', methods=['get'])
+def youtube_api():
+    global yt, url
+    url = request.args.get('url')
+    print(url)
+    itag= request.args.get('itag')
+    print(itag)
+    yt = YouTube(url)
+    if itag=='100':
+        ys = yt.streams.get_by_itag(140)
+    else:
+        ys=yt.streams.get_by_itag(itag)
+    x = ys.title
+    y=''
+    for character in x:
+        if character.isalnum():
+            y += character
+        else:
+            y += '_'
+
+    x = ''
+    y += str(itag)
+    ys.download(app.config['DOWNLOAD_FOLDER'], filename=y)
+    if itag=='100':
+        mp4_file = app.config['DOWNLOAD_FOLDER'] + f"{y}.mp4"
+        mp3_file = app.config['DOWNLOAD_FOLDER'] + f"{y}.mp3"
+        videoclip = AudioFileClip(mp4_file)
+        videoclip.write_audiofile(mp3_file)
+        videoclip.close()
+        filename=mp3_file
+    else:
+        filename = app.config['DOWNLOAD_FOLDER']+f"{y}.mp4"
+    print(filename)
+    filepath=f"http://www.ta-pal.com/{filename}"
+    # return redirect(f"http://www.ta-pal.com/{filename}", code=302)
+    # return send_from_directory(app.config['DOWNLOAD_FOLDER'], f"{y}.mp4", as_attachment=True)\
+
+    return jsonify(url=filepath)
+
+@app.route('/api/youtube/chrome', methods=['get'])
+def youtube_api_chrome():
+    global yt, url
+    url = request.args.get('url')
+    print(url)
+    itag= request.args.get('itag')
+    print(itag)
+    yt = YouTube(url)
+    if itag=='100':
+        ys = yt.streams.get_by_itag(140)
+    else:
+        ys=yt.streams.get_by_itag(itag)
+    x = ys.title
+    y=''
+    for character in x:
+        if character.isalnum():
+            y += character
+        else:
+            y += '_'
+
+    x = ''
+    y += str(itag)
+    ys.download(app.config['DOWNLOAD_FOLDER'], filename=y)
+    if itag=='100':
+        mp4_file = app.config['DOWNLOAD_FOLDER'] + f"{y}.mp4"
+        mp3_file = app.config['DOWNLOAD_FOLDER'] + f"{y}.mp3"
+        videoclip = AudioFileClip(mp4_file)
+        videoclip.write_audiofile(mp3_file)
+        videoclip.close()
+        filename=mp3_file
+    else:
+        filename = app.config['DOWNLOAD_FOLDER']+f"{y}.mp4"
+    print(filename)
+    filepath=f"http://www.ta-pal.com/{filename}"
+    #return redirect(f"http://www.ta-pal.com/{filename}", code=302)
+    return send_from_directory(app.config['DOWNLOAD_FOLDER'], f"{y}.mp4", as_attachment=True)\
+
+    # return jsonify(url=filepath)
+
 
 @app.route('/index', methods=['POST'])
 def get_url():
@@ -47,7 +128,8 @@ def get_url():
         for i in yt.streams.filter(file_extension='mp4', progressive='true'):
             str += f"<option onclick='download();' value='{i.itag}'>Video(mp4){i.resolution}</option>"
         for i in yt.streams.filter(only_audio=True, file_extension='mp4'):
-            str += f"<option onclick='download();' value='{i.itag}'>Audio(mp3)</option>"
+            str += f"<option onclick='download();' value='{i.itag}'>Audio(mp4)</option>"
+            str += f"<option onclick='download();' value='100'>Audio(mp3)</option>"
         str += "</select><button id='requestbtn' onclick='download();'>Request Download Link</button>"
         return str
     except:
@@ -61,7 +143,12 @@ def downlaod():
         url = request.form['url']
         yt = YouTube(url)
         print(res)
-        ys = yt.streams.get_by_itag(res)
+        itag=res
+        if res=='100':
+            ys = yt.streams.get_by_itag(140)
+            itag=140
+        else:
+            ys = yt.streams.get_by_itag(res)
         x = ys.title
         y = ''
         for character in x:
@@ -71,17 +158,24 @@ def downlaod():
                 y+='_'
 
         x = ''
-        y += str(res)
+        y += str(itag)
         print(y)
 
         ys.download("static/downloads/", filename=y)
         filename = f"static/downloads/{y}.mp4"
         resolution = ys.resolution
-        if ys.itag == 140:
+        if res == '100':
             thisFile = f"static/downloads/{y}.mp4"
             targetFile=f"static/downloads/{y}.mp3"
-            os.rename(thisFile, targetFile)
+            print("converting")
+            videoclip = AudioFileClip(thisFile)
+            videoclip.write_audiofile(targetFile)
+            print("done")
+            videoclip.close()
             filename=targetFile
+            type = 'Audio'
+            resolution = '128kbps'
+        elif res =='140':
             type = 'Audio'
             resolution = '128kbps'
         else:
