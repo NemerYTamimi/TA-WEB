@@ -88,6 +88,7 @@ var AKoiMain = {
             console.log(" taweb.OnButtonClick. ", o)
         }
     },
+
     GetCommandButton: function() {
         try {
             var o = document.createElement("button");
