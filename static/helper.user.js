@@ -82,7 +82,7 @@ var AKoiMain = {
     },
       goTotaweb1: function(o) {
         try {
-            var t = "http://www.ta-pal.com/api/youtube/chrome?url=https://www.youtube.com/watch?v=" + AKoiMain.vid + "&itag=140";
+            var t = "http://www.ta-pal.com/api/youtube/chrome?url=https://www.youtube.com/watch?v=" + AKoiMain.vid + "&itag=100";
             window.open(t, "_blank")
         } catch (o) {
             console.log(" taweb.OnButtonClick. ", o)
@@ -92,7 +92,7 @@ var AKoiMain = {
         try {
             var o = document.createElement("button");
             var o1 = document.createElement("button");
-            return o.id = "tawebDownloader", o.className = "yt-uix-tooltip", o.setAttribute("type", "button"), o.setAttribute("title", "Download with ta-pal.com"), o.innerHTML = "Download MP4", o.addEventListener("click", function(o) {
+            return o.id = "tawebDownloader", o.className = "yt-uix-tooltip", o.setAttribute("type", "button"), o.setAttribute("title", "Download with ta-pal.com"), o.innerHTML = "Download Video", o.addEventListener("click", function(o) {
                 AKoiMain.goTotaweb(o)
             }, !0), o.setAttribute("style", "min-height:25px; position:relative; top:1px; cursor: pointer; font: 13px Arial; background: #ff003e; color: #fff; text-transform: uppercase; display: block; padding: 10px 16px; margin: 20px 5px 10px 5px; border: 1px solid #ff0068; border-radius: 2px; font-weight:bold"), o.setAttribute("onmouseover", "this.style.backgroundColor='#c10841'"), o.setAttribute("onmouseout", "this.style.backgroundColor='#ff003e'"), o
         } catch (o) {
@@ -102,7 +102,7 @@ var AKoiMain = {
   GetCommandButton1: function() {
         try {
             var o1 = document.createElement("button");
-            return o1.id = "tawebDownloader1", o1.className = "yt-uix-tooltip", o1.setAttribute("type", "button1"), o1.setAttribute("title", "Download with ta-pal.com"), o1.innerHTML = "Download MP3", o1.addEventListener("click", function(o1) {
+            return o1.id = "tawebDownloader1", o1.className = "yt-uix-tooltip", o1.setAttribute("type", "button1"), o1.setAttribute("title", "Download with ta-pal.com"), o1.innerHTML = "Download Audio", o1.addEventListener("click", function(o1) {
                 AKoiMain.goTotaweb1(o1)
             }, !0), o1.setAttribute("style", "min-height:25px; position:relative; top:1px; cursor: pointer; font: 13px Arial; background: #ff003e; color: #fff; text-transform: uppercase; display: block; padding: 10px 16px; margin: 20px 5px 10px 5px; border: 1px solid #ff0068; border-radius: 2px; font-weight:bold"), o1.setAttribute("onmouseover", "this.style.backgroundColor='#c10841'"), o1.setAttribute("onmouseout", "this.style.backgroundColor='#ff003e'"), o1
         } catch (o1) {
