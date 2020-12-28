@@ -123,7 +123,7 @@ def youtube_api_chrome():
     print(filename)
     filepath=f"http://www.ta-pal.com/{filename}"
     #return redirect(f"http://www.ta-pal.com/{filename}", code=302)
-    return send_from_directory(app.config['DOWNLOAD_FOLDER'], f"{y}.mp4", as_attachment=True)
+    return send_from_directory(app.config['DOWNLOAD_FOLDER'], filename, as_attachment=True)
 
     # return jsonify(url=filepath)
 
