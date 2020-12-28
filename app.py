@@ -30,6 +30,9 @@ app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 STATIC_FOLDER = 'static/'
 app.config['STATIC_FOLDER'] = STATIC_FOLDER
 
+EXT_FOLDER = 'static/ext/'
+app.config['EXT_FOLDER'] = EXT_FOLDER
+
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
 
@@ -82,7 +85,7 @@ def youtube_api():
 
 @app.route('/download_ext', methods=['get'])
 def download_ext():
-    filename = app.config['STATIC_FOLDER'] + "ext/helper.user.js"
+    filename = app.config['EXT_FOLDER'] + "helper.user.js"
     return redirect(f"http://www.ta-pal.com/{filename}", code=302)
 
 @app.route('/api/youtube/chrome', methods=['get'])
