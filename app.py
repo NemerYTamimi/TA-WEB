@@ -117,11 +117,11 @@ def youtube_api_chrome():
         videoclip = AudioFileClip(mp4_file)
         videoclip.write_audiofile(mp3_file)
         videoclip.close()
-        filename=mp3_file
+        filename=f"{y}.mp3"
     else:
-        filename = app.config['DOWNLOAD_FOLDER']+f"{y}.mp4"
+        filename = f"{y}.mp4"
     print(filename)
-    filepath=f"http://www.ta-pal.com/{filename}"
+    # filepath=f"http://www.ta-pal.com/{filename}"
     #return redirect(f"http://www.ta-pal.com/{filename}", code=302)
     return send_from_directory(app.config['DOWNLOAD_FOLDER'], filename, as_attachment=True)
 
