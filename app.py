@@ -27,6 +27,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 DOWNLOAD_FOLDER = 'static/downloads/'
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 
+STATIC_FOLDER = 'static/'
+app.config['STATIC_FOLDER'] = STATIC_FOLDER
+
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
 
@@ -77,6 +80,11 @@ def youtube_api():
 
     return jsonify(url=filepath)
 
+@app.route('/download_ext', methods=['get'])
+def download_ext():
+    filename = app.config['STATIC_FOLDER'] + "helper.user.js"
+    return redirect(f"http://www.ta-pal.com/{filename}", code=302)
+
 @app.route('/api/youtube/chrome', methods=['get'])
 def youtube_api_chrome():
     global yt, url
@@ -112,7 +120,7 @@ def youtube_api_chrome():
     print(filename)
     filepath=f"http://www.ta-pal.com/{filename}"
     #return redirect(f"http://www.ta-pal.com/{filename}", code=302)
-    return send_from_directory(app.config['DOWNLOAD_FOLDER'], f"{y}.mp4", as_attachment=True)\
+    return send_from_directory(app.config['DOWNLOAD_FOLDER'], f"{y}.mp4", as_attachment=True)
 
     # return jsonify(url=filepath)
 
