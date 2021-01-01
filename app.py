@@ -162,7 +162,7 @@ def downlaod():
         else:
             ys = yt.streams.get_by_itag(res)
         x = ys.title
-    	y='TA-WEB.com_'
+        y='TA-WEB.com_'
         for character in x:
             if character.isalnum():
                 y += character
