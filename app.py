@@ -57,7 +57,7 @@ def youtube_api():
     else:
         ys=yt.streams.get_by_itag(itag)
     x = ys.title
-    y=''
+    y='TA-WEB.com_'
     for character in x:
         if character.isalnum():
             y += character
@@ -101,7 +101,7 @@ def youtube_api_chrome():
     else:
         ys=yt.streams.get_by_itag(itag)
     x = ys.title
-    y=''
+    y='TA-WEB.com_'
     for character in x:
         if character.isalnum():
             y += character
@@ -162,7 +162,7 @@ def downlaod():
         else:
             ys = yt.streams.get_by_itag(res)
         x = ys.title
-        y = ''
+    	y='TA-WEB.com_'
         for character in x:
             if character.isalnum():
                 y += character
