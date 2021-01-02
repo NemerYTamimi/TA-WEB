@@ -64,7 +64,8 @@ def youtube_api():
         else:
             y += '_'
 
-    y += 'TA-WEB.com_'
+    x = ''
+    y += str(itag)
     ys.download(app.config['DOWNLOAD_FOLDER'], filename=y)
     if itag=='100':
         mp4_file = app.config['DOWNLOAD_FOLDER'] + f"{y}.mp4"
@@ -107,7 +108,9 @@ def youtube_api_chrome():
         else:
             y += '_'
 
-    y += 'TA-WEB.com_'
+
+    x = ''
+    y += str(itag)
     ys.download(app.config['DOWNLOAD_FOLDER'], filename=y)
     if itag=='100':
         mp4_file = app.config['DOWNLOAD_FOLDER'] + f"{y}.mp4"
@@ -159,13 +162,15 @@ def downlaod():
         else:
             ys = yt.streams.get_by_itag(res)
         x = ys.title
-        y='TA-WEB.com_'
+        y=''
         for character in x:
             if character.isalnum():
                 y += character
             else:
                 y+='_'
-        y += 'TA-WEB.com_'
+
+        x = ''
+        y += str(itag)
         print(y)
 
         ys.download("static/downloads/", filename=y)
