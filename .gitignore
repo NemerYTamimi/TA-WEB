@@ -1,7 +1,10 @@
 # Editors
 .vscode/
 .idea/
-
+pyvenv.cfg
+remove_downloads.py
+remove_uploads.py
+start_server.sh
 # Vagrant
 .vagrant/
 
