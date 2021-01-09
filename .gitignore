@@ -1,6 +1,7 @@
 # Editors
 .vscode/
 .idea/
+./Scripts
 pyvenv.cfg
 remove_downloads.py
 remove_uploads.py
