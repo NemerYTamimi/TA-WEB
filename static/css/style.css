@@ -14,7 +14,7 @@ body{
     line-height: 24px;
     font-weight: 400;
     color: #212112;
-    background-image: url(../pat-back.svg), url(../pat-back2.png);
+    background-image: url(../pat-back.svg);
     background-position: center, bottom left;
     background-repeat: repeat, no-repeat;
     background-attachment: fixed;
