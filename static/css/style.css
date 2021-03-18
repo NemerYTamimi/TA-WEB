@@ -72,8 +72,8 @@ body{
     padding: 0;
 }
 .navbar-brand img{
-    height: 50px;
-    width: 100px;
+    height: 32px;
+    width: 32px;
     display: block;
     filter: brightness(10%);
     -webkit-transition : all 0.3s ease-out;
