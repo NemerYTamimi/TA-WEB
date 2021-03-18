@@ -22,7 +22,7 @@ moviepy==1.0.3
 null==0.6.1
 numpy==1.19.3
 packaging==20.8
-Pillow==8.0.1
+Pillow>=8.1.1
 proglog==0.1.9
 pyjsparser==2.7.1
 pyparsing==2.4.7
