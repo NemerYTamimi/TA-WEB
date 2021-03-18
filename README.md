@@ -1,3 +1,7 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/NemerYTamimi/TA-WEB)
+
+![logo](http://www.ta-pal.com/static/heroku_deployment_ico.png)
+
 # TA-WEB
 
 
