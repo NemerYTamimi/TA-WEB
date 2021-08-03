@@ -36,9 +36,9 @@ to install flask use
 pip install Flask
 ```
 
-to install pytube
+to install requirements
 ```
-pip install pytube4
+pip install -r requirements.txt 
 ```
 to install  groupdoc conversing api
 ```
