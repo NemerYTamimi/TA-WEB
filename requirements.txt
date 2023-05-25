@@ -14,7 +14,7 @@ gunicorn==20.0.4
 idna==2.10
 imageio==2.9.0
 imageio-ffmpeg==0.4.2
-itsdangerous==1.1.0
+itsdangerous>=2.1.2
 Jinja2>=3.1.2
 Js2Py==0.70
 MarkupSafe==1.1.1
